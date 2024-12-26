@@ -6,10 +6,6 @@ public class Main {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int screenWidth = (int) screenSize.getWidth();
         int screenHeight = (int) screenSize.getHeight();
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                new MainMenu(screenWidth, screenHeight);
-            }
-        });
+        SwingUtilities.invokeLater(() -> new MainMenu(screenWidth, screenHeight));
     }
 }

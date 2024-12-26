@@ -1,5 +1,6 @@
 import javax.swing.JOptionPane;
 import java.io.*;
+import java.util.List;
 
 public class HighScoreNamePrompt {
     public HighScoreNamePrompt() throws IOException {
@@ -12,11 +13,16 @@ public class HighScoreNamePrompt {
         if (name == null || name.isEmpty())
             name = "anonymous";
         int score = 100;
-        HighScoresEntry entry = new HighScoresEntry(name, score);
+        List<ScoreEntry> entries = Loader.loadScores();
+        entries.add(new ScoreEntry(name, score));
+        File highscores = new File(Loader.PATH);
+        highscores.delete();
         ObjectOutputStream oos = null;
         try {
-            oos = new ObjectOutputStream(new FileOutputStream("highscores.txt"));
-            oos.writeObject(entry);
+            oos = new ObjectOutputStream(new FileOutputStream(Loader.PATH, true));
+            for (ScoreEntry entry: entries) {
+                oos.writeObject(entry);
+            }
         } catch (IOException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
