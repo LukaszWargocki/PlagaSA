@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.io.*;
 import java.util.*;
 
-public class HighScores extends JFrame {
+public class HighScores extends JList {
     public void HighScores () throws IOException {
         ObjectInputStream ois = null;
         List<HighScoresEntry> rating = new ArrayList<>();
