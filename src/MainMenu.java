@@ -31,6 +31,7 @@ public class MainMenu extends JFrame {
             for (ScoreEntry score: scores) {
                 System.out.println(score);
             }
+            HighScores highscore = new HighScores(scores);
         });
         ExitButton exitButton = new ExitButton();
         backdrop.add(newGameButton);

@@ -14,5 +14,15 @@ public class HighScores extends JFrame {
         setVisible(true);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        entries.sort(new Comparator<ScoreEntry>() {
+            @Override
+            public int compare(ScoreEntry o1, ScoreEntry o2) {
+                // replacement by InellJ for of double ternary operator
+                return Integer.compare(o2.score, o1.score);
+            }
+        });
+        JList<ScoreEntry> list = new JList<>((ListModel) entries);
+        JScrollPane pane = new JScrollPane(list);
+        add(pane);
     }
 }
