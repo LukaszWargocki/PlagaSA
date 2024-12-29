@@ -27,11 +27,11 @@ public class MainMenu extends JFrame {
                 ex.printStackTrace();
                 throw new RuntimeException(ex);
             }
-            java.util.List<ScoreEntry> scores = Loader.loadScores();
-            for (ScoreEntry score: scores) {
+            java.util.List<HighScoreEntry> scores = HighScoresManager.loadScores();
+            for (HighScoreEntry score: scores) {
                 System.out.println(score);
             }
-            HighScores highscore = new HighScores(scores);
+            HighScoresComponent highscore = new HighScoresComponent(scores);
         });
         ExitButton exitButton = new ExitButton();
         backdrop.add(newGameButton);

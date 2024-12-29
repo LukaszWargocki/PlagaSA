@@ -12,23 +12,11 @@ public class HighScoreNamePrompt {
         );
         if (name == null || name.isEmpty())
             name = "anonymous";
-        int score = 100;
-        List<ScoreEntry> entries = Loader.loadScores();
-        entries.add(new ScoreEntry(name, score));
-        File highscores = new File(Loader.PATH);
+        int score = 55;
+        List<HighScoreEntry> entries = HighScoresManager.loadScores();
+        entries.add(new HighScoreEntry(name, score));
+        File highscores = new File(HighScoresManager.PATH);
         highscores.delete();
-        ObjectOutputStream oos = null;
-        try {
-            oos = new ObjectOutputStream(new FileOutputStream(Loader.PATH, true));
-            for (ScoreEntry entry: entries) {
-                oos.writeObject(entry);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);
-        } finally {
-            if (oos != null)
-                oos.close();
-        }
+        HighScoresManager.saveScores(entries);
     }
 }
