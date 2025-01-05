@@ -15,16 +15,11 @@ public final class HighScoresManager {
             if (!highscores.createNewFile()) {
                 ois = new ObjectInputStream(new FileInputStream(PATH));
                 HighScoreEntry hse;
-                while (true) {
-                    try {
-                        hse = (HighScoreEntry) ois.readObject();
-                        entries.add(hse);
-                    } catch (EOFException eofException) {
-                            break;
-                        }
-                }
-                ois.close();
+                while ((hse = (HighScoreEntry) ois.readObject()) != null)
+                    entries.add(hse);
             }
+            if (ois != null)
+                ois.close();
         } catch (IOException | ClassNotFoundException ex) {
             ex.printStackTrace();
         }
@@ -37,6 +32,7 @@ public final class HighScoresManager {
             for (HighScoreEntry entry: entries) {
                 oos.writeObject(entry);
             }
+            oos.writeObject(null);
         } catch (IOException e) {
             e.printStackTrace();
             throw new RuntimeException(e);

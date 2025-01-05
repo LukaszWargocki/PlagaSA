@@ -12,7 +12,7 @@ public class HighScoreNamePrompt {
         );
         if (name == null || name.isEmpty())
             name = "anonymous";
-        int score = 55;
+        int score = 99;
         List<HighScoreEntry> entries = HighScoresManager.loadScores();
         entries.add(new HighScoreEntry(name, score));
         File highscores = new File(HighScoresManager.PATH);

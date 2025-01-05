@@ -1,12 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.EOFException;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.util.*;
 
 public class MainMenu extends JFrame {
     public MainMenu(int screenWidth, int screenHeight) {
@@ -31,7 +25,7 @@ public class MainMenu extends JFrame {
             for (HighScoreEntry score: scores) {
                 System.out.println(score);
             }
-            HighScoresComponent highscore = new HighScoresComponent(scores);
+            new HighScoresComponent(scores);
         });
         ExitButton exitButton = new ExitButton();
         backdrop.add(newGameButton);
