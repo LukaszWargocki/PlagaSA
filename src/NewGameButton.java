@@ -19,8 +19,9 @@ public class NewGameButton extends JButton {
                         null,
                         options, options[1]
                 );
-                System.out.println(difficulty);
+                System.out.println(options[difficulty]);
                 //startGame(difficulty);
+                SwingUtilities.windowForComponent((JButton) e.getSource()).dispose();
             }
         });
     }
