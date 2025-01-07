@@ -22,6 +22,7 @@ public final class HighScoresManager {
                 ois.close();
         } catch (IOException | ClassNotFoundException ex) {
             ex.printStackTrace();
+            new ErrorMessage(ex.toString());
         }
         return entries;
     }
@@ -33,9 +34,9 @@ public final class HighScoresManager {
                 oos.writeObject(entry);
             }
             oos.writeObject(null);
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            new ErrorMessage(ex.toString());
         } finally {
             if (oos != null)
                 oos.close();

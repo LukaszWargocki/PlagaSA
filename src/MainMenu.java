@@ -6,9 +6,10 @@ public class MainMenu extends JFrame {
     public MainMenu(int screenWidth, int screenHeight) {
         this.setTitle("Plaga SA");
         // TODO: icon image assets and import
-        //ImageIcon titleIcon = new ImageIcon("biohazard600.png");
+        ImageIcon titleIcon = new ImageIcon("biohazard600.png");
         JPanel backdrop = new JPanel(new GridLayout(4,1));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setIconImage(titleIcon.getImage());
         setSize(screenWidth, screenHeight);
         setLocationRelativeTo(null);
         setVisible(true);
@@ -19,9 +20,10 @@ public class MainMenu extends JFrame {
                 new HighScoreNamePrompt();
             } catch (IOException ex) {
                 ex.printStackTrace();
-                throw new RuntimeException(ex);
+                new ErrorMessage(ex.toString());
             }
             java.util.List<HighScoreEntry> scores = HighScoresManager.loadScores();
+            // TODO: Usunąć
             for (HighScoreEntry score: scores) {
                 System.out.println(score);
             }

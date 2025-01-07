@@ -1,6 +1,8 @@
 import javax.swing.*;
 
 public class ErrorMessage {
-    // TODO: implementation
-//    int choice = JOptionPane.show
+    // TODO: add print stack trace and error message arguments
+    public ErrorMessage(String message) {
+        JOptionPane.showMessageDialog(null, message, "Error", JOptionPane.ERROR_MESSAGE);
+    }
 }

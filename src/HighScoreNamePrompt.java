@@ -10,11 +10,15 @@ public class HighScoreNamePrompt {
                 "New High Score!",
                 JOptionPane.QUESTION_MESSAGE
         );
+        // obsługa braku wejścia
         if (name == null || name.isEmpty())
             name = "anonymous";
-        int score = 99;
+        // TODO: pobieranie rzeczywistego wyniku
+        int score = 3;
+        // zczytaj wyniki z pliku do listy, dodaj wynik
         List<HighScoreEntry> entries = HighScoresManager.loadScores();
         entries.add(new HighScoreEntry(name, score));
+        // z jeden plik - jeden strumień; nadpisuję nową listę
         File highscores = new File(HighScoresManager.PATH);
         highscores.delete();
         HighScoresManager.saveScores(entries);
