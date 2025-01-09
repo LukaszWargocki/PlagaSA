@@ -1,11 +1,10 @@
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
-public class NewGameButton extends JButton {
+public class NewGameButton extends MainMenuButton {
     private int difficulty;
     public NewGameButton() {
-        this.setText("New Game");
+        super("New Game");
         String[] options = {"Easy", "Normal", "Hard"};
         this.addActionListener(new ActionListener() {
             @Override
@@ -19,15 +18,12 @@ public class NewGameButton extends JButton {
                         null,
                         options, options[1]
                 );
-                System.out.println(options[difficulty]);
+                //System.out.println(options[difficulty]);
                 //startGame(difficulty);
                 SwingUtilities.windowForComponent((JButton) e.getSource()).dispose();
                 Game game = new Game();
                 game.start();
             }
         });
-    }
-    public int getDifficulty() {
-        return this.difficulty;
     }
 }

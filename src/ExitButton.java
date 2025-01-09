@@ -1,9 +1,9 @@
 import javax.swing.*;
 import java.awt.event.*;
 
-public class ExitButton extends JButton {
+public class ExitButton extends MainMenuButton {
     public ExitButton() {
-        this.setText("Exit");
+        super("Exit");
         this.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

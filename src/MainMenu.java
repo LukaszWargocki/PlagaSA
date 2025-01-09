@@ -1,38 +1,48 @@
+import com.sun.tools.javac.Main;
+
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
+import java.awt.event.*;
 
 public class MainMenu extends JFrame {
     public MainMenu(int screenWidth, int screenHeight) {
-        this.setTitle("Plaga SA");
-        // TODO: icon image assets and import
-        ImageIcon titleIcon = new ImageIcon("biohazard600.png");
-        JPanel backdrop = new JPanel(new GridLayout(4,1));
+
+        // window setup
+        setTitle("Plaga SA");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setIconImage(titleIcon.getImage());
         setSize(screenWidth, screenHeight);
         setLocationRelativeTo(null);
         setVisible(true);
+
+        // background
+        JLabel background = new JLabel(new ImageIcon("resources/bg1080.jpg"));
+        background.setBounds(0, 0, screenWidth, screenHeight);
+        setContentPane(background);
+
+        // buttons panel
+        JPanel menuPanel = new JPanel(new GridLayout(3,1, 10, 10));
+        menuPanel.setBounds(getWidth()/6, getHeight() / 3, getWidth() / 6, getHeight() / 3);
+        menuPanel.setOpaque(false);
+
+        // construct buttons
         NewGameButton newGameButton = new NewGameButton();
-        JButton highScoresButton = new JButton("High Scores");
-        highScoresButton.addActionListener(e -> {
-            try {
-                new HighScoreNamePrompt();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-                new ErrorMessage(ex.toString());
-            }
-            java.util.List<HighScoreEntry> scores = HighScoresManager.loadScores();
-            // TODO: Usunąć
-            for (HighScoreEntry score: scores) {
-                System.out.println(score);
-            }
-            new HighScoresComponent(scores);
-        });
+        HighScoresButton highScoresButton = new HighScoresButton();
         ExitButton exitButton = new ExitButton();
-        backdrop.add(newGameButton);
-        backdrop.add(highScoresButton);
-        backdrop.add(exitButton);
-        add(backdrop);
+
+        // add components
+        menuPanel.add(newGameButton);
+        menuPanel.add(highScoresButton);
+        menuPanel.add(exitButton);
+        add(menuPanel);
+
+        // update menu size on resizing of window
+        addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                super.componentResized(e);
+                menuPanel.setBounds(getWidth()/6, getHeight() / 3, getWidth() / 6, getHeight() / 3);
+                revalidate();
+            }
+        });
     }
 }
