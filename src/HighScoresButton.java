@@ -1,8 +1,8 @@
 import java.io.IOException;
 
 public class HighScoresButton extends MainMenuButton {
-    public HighScoresButton() {
-        super("High Scores");
+    public HighScoresButton(int fontHeight) {
+        super("High Scores", fontHeight);
         this.addActionListener(e -> {
             try {
                 new HighScoreNamePrompt();

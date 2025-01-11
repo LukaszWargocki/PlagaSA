@@ -4,11 +4,10 @@ import javax.swing.*;
 public class Game implements Runnable {
 
     public int difficulty = -1;
-    public final String TITLE = "Plaga SA";
     private boolean running = false;
     private Thread thread;
 
-    protected synchronized void start() {
+    protected void start() {
         if (running)
             return;
 
@@ -17,7 +16,7 @@ public class Game implements Runnable {
         thread.start();
     }
 
-    private synchronized void stop() {
+    protected void stop() {
         if (!running)
             return;
 
@@ -71,12 +70,10 @@ public class Game implements Runnable {
     }
 
     public static void main(String[] args) {
-        // TODO: testy skalowania
+        // TODO: initial screen size
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int screenWidth = (int) screenSize.getWidth();
-        int screenHeight = (int) screenSize.getHeight();
-        SwingUtilities.invokeLater(() -> new MainMenu(screenWidth, screenHeight));
+        int width = (int) screenSize.getWidth();
+        int height = (int) screenSize.getHeight();
+        SwingUtilities.invokeLater(() -> new MainMenu(width, height));
     }
-
-
 }

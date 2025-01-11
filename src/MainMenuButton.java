@@ -1,7 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 
 public class MainMenuButton extends JButton {
     // TODO: add scalable font size parameter
@@ -13,18 +12,17 @@ public class MainMenuButton extends JButton {
         setBorderPainted(false);
         setForeground(Color.WHITE);
         setFont(new Font("Monospaced", Font.BOLD, size));
-        MainMenuButton b = this;
+
+        // cause MouseListener would've required implementation of all mouseEvents
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                super.mouseEntered(e);
+                JButton b = (JButton) e.getSource();
                 b.setBorderPainted(true);
             }
-        });
-        addMouseListener(new MouseAdapter() {
             @Override
             public void mouseExited(MouseEvent e) {
-                super.mouseEntered(e);
+                JButton b = (JButton) e.getSource();
                 b.setBorderPainted(false);
             }
         });
