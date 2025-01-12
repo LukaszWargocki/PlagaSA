@@ -3,7 +3,6 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class MainMenuButton extends JButton {
-    // TODO: add scalable font size parameter
     public MainMenuButton(String title, int size) {
         super(title);
         setOpaque(false);
