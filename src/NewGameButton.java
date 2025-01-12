@@ -19,7 +19,6 @@ public class NewGameButton extends MainMenuButton {
                         null,
                         options, options[1]
                 );
-                //System.out.println(options[difficulty]);
                 //startGame(difficulty);
                 Window menuWindow = SwingUtilities.windowForComponent((JButton) e.getSource());
                 Game game = new Game();

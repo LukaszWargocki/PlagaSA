@@ -35,7 +35,7 @@ public class MainMenu {
 
         // buttons panel
         JPanel menuPanel = new JPanel(new GridLayout(3,1, 10, 10));
-        menuPanel.setBounds(width/6, height / 3, width / 6, height / 3);
+        menuPanel.setBounds(width / 6, height / 3, width / 6, height / 3);
         menuPanel.setOpaque(false);
 
         // construct buttons
