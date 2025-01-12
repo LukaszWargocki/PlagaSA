@@ -2,7 +2,7 @@ import java.awt.*;
 
 public class Region {
     public static Color NAM_COL = new Color(7,104,172);
-    public static Color LAN_COL =  new Color(118,42,132);
+    public static Color LAM_COL =  new Color(118,42,132);
     public static Color SUB_COL =  new Color(255,255,51);
     public static Color MAG_COL =  new Color(247,129,190);
     public static Color EUR_COL =  new Color(252,187,131);
@@ -13,9 +13,9 @@ public class Region {
     public static Color EAS_COL = new Color(191, 129,46);
     public static Color SEA_COL =  new Color(139,149,198);
     public static Color OCE_COL =  new Color(114, 175, 72);
-    private static int BLOCK_BORDERS_THRESHOLD;
-    private static int BLOCK_PORTS_THRESHOLD;
-    private static int BLOCK_AIRPORTS_THRESHOLD;
+    private double BLOCK_BORDERS_THRESHOLD;
+    private double BLOCK_PORTS_THRESHOLD;
+    private double BLOCK_AIRPORTS_THRESHOLD;
     private Color color;
     private String name;
     private int population;
@@ -33,10 +33,14 @@ public class Region {
     private boolean upgrade9 = false;
 
 
-    public Region(String name, Color color, int population) {
+    public Region(String name, Color color, int population, double bbt, double bpt, double bat) {
         this.name = name;
         this.color = color;
         this.population = population;
+        this.BLOCK_AIRPORTS_THRESHOLD = bat;
+        this.BLOCK_PORTS_THRESHOLD = bpt;
+        this.BLOCK_BORDERS_THRESHOLD = bbt;
+
     }
     public void setInfected(int infected) {
         this.infected = infected;
@@ -58,6 +62,33 @@ public class Region {
     }
     public Color getColor() {
         return color;
+    }
+    public boolean getUpgrade1() {
+        return upgrade1;
+    }
+    public boolean getUpgrade2() {
+        return upgrade2;
+    }
+    public boolean getUpgrade3() {
+        return upgrade3;
+    }
+    public boolean getUpgrade4() {
+        return upgrade4;
+    }
+    public boolean getUpgrade5() {
+        return upgrade5;
+    }
+    public boolean getUpgrade6() {
+        return upgrade6;
+    }
+    public boolean getUpgrade7() {
+        return upgrade7;
+    }
+    public boolean getUpgrade8() {
+        return upgrade8;
+    }
+    public boolean getUpgrade9() {
+        return upgrade9;
     }
     public void setColor(int r, int g, int b) {
         this.color = new Color(r, g, b);

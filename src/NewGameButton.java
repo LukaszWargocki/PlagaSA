@@ -22,7 +22,7 @@ public class NewGameButton extends MainMenuButton {
                 //startGame(difficulty);
                 Window menuWindow = SwingUtilities.windowForComponent((JButton) e.getSource());
                 Game game = new Game();
-                GameScreen gs = new GameScreen(menuWindow.getWidth(), menuWindow.getHeight(), game);
+//                GameScreen gs = new GameScreen(menuWindow.getWidth(), menuWindow.getHeight(), game);
                 game.start();
                 menuWindow.dispose();
             }

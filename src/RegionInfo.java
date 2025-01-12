@@ -1,15 +1,14 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+import java.awt.event.*;
 
 public class RegionInfo extends JFrame {
-    public RegionInfo(Region region, int width, int height) {
+    public RegionInfo(String name, int width, int height) {
         RegionInfo panel = this;
         setSize(width, height);
         this.setBackground(Color.LIGHT_GRAY);
-        this.setTitle(region.getName());
-        JLabel label = new JLabel("Region Info");
+        this.setTitle(name);
+        JLabel label = new JLabel();
         JButton dismissButton = new JButton("Dismiss");
         dismissButton.addActionListener(ae -> panel.dispose());
         setLayout(new BorderLayout());
@@ -19,7 +18,7 @@ public class RegionInfo extends JFrame {
         panel.setLocationRelativeTo(null);
         panel.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        JCheckBox upgrade1 = new JCheckBox("Paper Masks");
+        JCheckBox upgrade1 = new JCheckBox("Face Masks");
         upgrade1.setToolTipText("Decreases chance of infection by 20%");
         JCheckBox upgrade2 = new JCheckBox("Mechanical Respirators");
         upgrade2.setToolTipText("Doubles survivability of infected patients");
@@ -39,19 +38,30 @@ public class RegionInfo extends JFrame {
         upgrade9.setToolTipText("Decreases threshold for closing land borders by 50%");
         // icon
         // price
+        label.add(new UpgradeLabel( "$500"));
         label.add(upgrade1);
         // icon
         // price
+        label.add(new JLabel("$500"));
         label.add(upgrade3);
+        label.add(new JLabel("$500"));
         label.add(upgrade2);
+        label.add(new JLabel("$500"));
         label.add(upgrade4);
+        label.add(new JLabel("$500"));
         label.add(upgrade5);
+        label.add(new JLabel("$500"));
         label.add(upgrade6);
+        label.add(new JLabel("$500"));
         label.add(upgrade7);
+        label.add(new JLabel("$500"));
         label.add(upgrade8);
+        label.add(new JLabel("$500"));
         label.add(upgrade9);
-        label.setLayout(new GridLayout(9,3));
-
+        label.setLayout(new GridLayout(9,2));
+//        if (region.getUpgrade1())
+//            lockUpgrade(upgrade1);
+//
         upgrade1.addItemListener(new CheckOnceListener());
         upgrade2.addItemListener(new CheckOnceListener());
         upgrade3.addItemListener(new CheckOnceListener());
@@ -62,15 +72,20 @@ public class RegionInfo extends JFrame {
         upgrade8.addItemListener(new CheckOnceListener());
         upgrade9.addItemListener(new CheckOnceListener());
     }
-    public class CheckOnceListener implements ItemListener {
 
+    public class CheckOnceListener implements ItemListener {
         @Override
         public void itemStateChanged(ItemEvent e) {
             JCheckBox cb = (JCheckBox) e.getSource();
             if (e.getStateChange() == ItemEvent.SELECTED) {
-                cb.setEnabled(false);
-                cb.setSelected(true);
+                lockUpgrade(cb);
+//                cb.setEnabled(false);
+//                cb.setSelected(true);
             }
         }
+    }
+    public void lockUpgrade (JCheckBox cb) {
+        cb.setSelected(true);
+        cb.setEnabled(false);
     }
 }
