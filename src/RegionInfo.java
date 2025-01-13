@@ -3,15 +3,18 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class RegionInfo extends JFrame {
-    public RegionInfo(String name, int width, int height) {
+    public RegionInfo(Region region, int width, int height) {
         RegionInfo panel = this;
         setSize(width, height);
         this.setBackground(Color.LIGHT_GRAY);
-        this.setTitle(name);
+        this.setTitle("Region Information");
+        JLabel topLabel = new JLabel(region.getName());
+        topLabel.setHorizontalAlignment(JLabel.CENTER);
         JLabel label = new JLabel();
         JButton dismissButton = new JButton("Dismiss");
         dismissButton.addActionListener(ae -> panel.dispose());
         setLayout(new BorderLayout());
+        panel.add(topLabel, BorderLayout.NORTH);
         panel.add(label, BorderLayout.CENTER);
         panel.add(dismissButton, BorderLayout.SOUTH);
         panel.setVisible(true);
@@ -32,7 +35,7 @@ public class RegionInfo extends JFrame {
         upgrade6.setToolTipText("Decreases chance of transiting disease to other countries by airplane by 50%");
         JCheckBox upgrade7 = new JCheckBox("Airport Swipe Tests");
         upgrade7.setToolTipText("Decreases threshold for closing airports by 50%");
-        JCheckBox upgrade8 = new JCheckBox("Border Body Temperature Check");
+        JCheckBox upgrade8 = new JCheckBox("Border Controls");
         upgrade8.setToolTipText("Decreases chance of transiting disease to other countries by land by 50%");
         JCheckBox upgrade9 = new JCheckBox("Border Wall");
         upgrade9.setToolTipText("Decreases threshold for closing land borders by 50%");
@@ -59,26 +62,33 @@ public class RegionInfo extends JFrame {
         label.add(new JLabel("$500"));
         label.add(upgrade9);
         label.setLayout(new GridLayout(9,2));
-//        if (region.getUpgrade1())
-//            lockUpgrade(upgrade1);
-//
-        upgrade1.addItemListener(new CheckOnceListener());
-        upgrade2.addItemListener(new CheckOnceListener());
-        upgrade3.addItemListener(new CheckOnceListener());
-        upgrade4.addItemListener(new CheckOnceListener());
-        upgrade5.addItemListener(new CheckOnceListener());
-        upgrade6.addItemListener(new CheckOnceListener());
-        upgrade7.addItemListener(new CheckOnceListener());
-        upgrade8.addItemListener(new CheckOnceListener());
-        upgrade9.addItemListener(new CheckOnceListener());
+        if (region.getUpgrade1())
+            lockUpgrade(upgrade1);
+        if (region.getUpgrade5())
+            lockUpgrade(upgrade5);
+
+        upgrade1.addItemListener(new CheckOnceListener(region));
+        upgrade2.addItemListener(new CheckOnceListener(region));
+        upgrade3.addItemListener(new CheckOnceListener(region));
+        upgrade4.addItemListener(new CheckOnceListener(region));
+        upgrade5.addItemListener(new CheckOnceListener(region));
+        upgrade6.addItemListener(new CheckOnceListener(region));
+        upgrade7.addItemListener(new CheckOnceListener(region));
+        upgrade8.addItemListener(new CheckOnceListener(region));
+        upgrade9.addItemListener(new CheckOnceListener(region));
     }
 
     public class CheckOnceListener implements ItemListener {
+        Region region;
+        public CheckOnceListener(Region region) {
+            this.region = region;
+        }
         @Override
         public void itemStateChanged(ItemEvent e) {
             JCheckBox cb = (JCheckBox) e.getSource();
             if (e.getStateChange() == ItemEvent.SELECTED) {
                 lockUpgrade(cb);
+                region.setUpgrade9(true);
 //                cb.setEnabled(false);
 //                cb.setSelected(true);
             }

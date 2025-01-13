@@ -31,7 +31,8 @@ public class Game implements Runnable {
         if (running)
             return;
         // setting up regions
-        eas.setInfected(1);
+        nam.setUpgrade1(true);
+        nam.setUpgrade5(true);
         regiony.put(Region.NAM_COL, nam);
         regiony.put(Region.LAM_COL, lam);
         regiony.put(Region.SUB_COL, sub);
@@ -44,7 +45,11 @@ public class Game implements Runnable {
         regiony.put(Region.EAS_COL, eas);
         regiony.put(Region.SEA_COL, sea);
         regiony.put(Region.OCE_COL, oce);
-
+        Region temp = regiony.get(Region.EAS_COL);
+        System.out.println(regiony.get(Region.EAS_COL).getInfected());
+        temp.setInfected(6);
+        regiony.put(Region.EAS_COL, temp);
+        System.out.println(regiony.get(Region.EAS_COL).getInfected());
         running = true;
         thread = new Thread(this);
         thread.start();
@@ -129,19 +134,19 @@ public class Game implements Runnable {
                 ex.printStackTrace();
                 new ErrorMessage(ex.toString());
             }
-            // exit to main menu
+            // exit to main menu on ctrl+shift+q
             gs.requestFocus();
             gs.addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyPressed(KeyEvent e) {
                     if (e.isControlDown() && e.isShiftDown() && e.getKeyCode() == KeyEvent.VK_Q) {
-                        System.out.println("works");
                         SwingUtilities.invokeLater(() -> new MainMenu(screenWidth, screenHeight));
                         gs.dispose();
                         game.stop();
                     }
                 }
             });
+            // on click, pull up upgrade+info panel for color-coded region
             gs.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
@@ -150,10 +155,13 @@ public class Game implements Runnable {
                     Graphics g = bi.getGraphics();
                     gs.paint(g);
                     Color color = new Color(bi.getRGB(point.x, point.y));
+                    Region region = regiony.get(color);
                     if (color.equals(Region.SAS_COL))
                         System.out.println("India clicked!");
                     if (color.equals(Region.NAM_COL))
-                        SwingUtilities.invokeLater(() -> new RegionInfo("North America", gs.getWidth()/6, gs.getHeight()/2));
+                        SwingUtilities.invokeLater(() -> new RegionInfo(region, gs.getWidth()/4, gs.getHeight()/2));
+                    // TODO: zwrócić Region z modyfikacjami poczynionymi w oknie
+//                        SwingUtilities.invokeLater(() -> new RegionInfo("North America", gs.getWidth()/4, gs.getHeight()/2));
                 }
             });
         }

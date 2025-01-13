@@ -7,6 +7,7 @@ public class HighScoresListModel extends AbstractListModel {
     public HighScoresListModel() {
         this.entries = new ArrayList<>();
     }
+
     public HighScoresListModel(List<HighScoreEntry> list) {
         this.entries = list;
     }
